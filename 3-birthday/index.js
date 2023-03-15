@@ -2,10 +2,10 @@
 
 const userBirthday = '2022-01-01';
 
-function isAgeValid(dateStr) {
+function isValidAge(dateStr) {
     const currentDate = new Date();
     const userDate = new Date(dateStr);
-    if (userDate.getMonth > 11) { return false; };
+    if (userDate.getMonth() >= 11) { return false; };
     const deltaAge = Number(currentDate.getFullYear()) - Number(userDate.getFullYear());
     return (deltaAge > 14) ? true : false;
 }
