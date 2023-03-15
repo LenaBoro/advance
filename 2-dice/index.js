@@ -9,5 +9,5 @@ const d20 = [1, 20];
 
 function rollDice(typeDice) {
     const [min, max] = typeDice;
-    return Math.floor(Math.random() * ((max - min) + 1) + 1);
+    return Math.floor(Math.random() * ((max - min) + 1) + min);
 }
