@@ -7,8 +7,8 @@ const arrayObjPeople = [
 ];
 const setObjPeople = new Set(arrayObjPeople.map((obj) => {
     return arrayObjPeople.find(people => {
-        if (people.id !== obj.id) {
-            return obj;
+        if (people.id === obj.id) {
+            return people;
         }
     })
 }));
