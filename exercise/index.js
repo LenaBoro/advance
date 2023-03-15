@@ -36,3 +36,20 @@ function convert(sum, currentCurrency, convertToCurrency) {
     return new Intl.NumberFormat('ru-Ru', options).format(sum * currencies.mult / convert.mult);
 }
 
+/* 5 step */
+const user = {
+    name: 'Vasya',
+    birthday: '02/15/2023',
+}
+
+function isBirthday(user) {
+    const birthdayUser = new Date(user.birthday);
+    const currentDay = new Date();
+    if (birthdayUser.getMonth() !== currentDay.getMonth()) {
+        return false;
+    }
+    if (birthdayUser.getDate() !== currentDay.getDate()) {
+        return false;
+    }
+    return true;
+}
