@@ -9,3 +9,30 @@ let weatherMap = new Map([
 
 let arrayWeatherMap = [...weatherMap].map((weather) => weather.reverse());
 weatherMap = new Map([...arrayWeatherMap]);
+
+/* 4 step */
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (((max - min) + 1) + min));
+}
+
+function convert(sum, currentCurrency, convertToCurrency) {
+    const currencies = [
+        { name: 'USD', mult: 1 },
+        { name: 'RUB', mult: 1 / 70 },
+        { name: 'EUR', mult: 1.1 }
+    ];
+
+    const initialState = currencies.find(c => c.name === currencies.find(c => c.name === currentCurrency));
+    if (!initialState) { return null; }
+
+    const convert = currencies.find(c => c.name === currencies.find(c => c.name === convertToCurrency))
+    if (!convert) { return null; }
+
+    const options = {
+        style: 'currency',
+        currency: convertToCurrency
+    }
+    return new Intl.NumberFormat('ru-Ru', options).format(sum * currencies.mult / convert.mult);
+}
+
