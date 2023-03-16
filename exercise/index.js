@@ -55,21 +55,26 @@ function isBirthday(user) {
 }
 
 /* 6 step */
+function pizzaTimer(time) {
+    const finish = new Date.getTime() + time;
+    const correctionEventLoop = 100;
 
-/* 5 step */
-const user = {
-    name: 'Vasya',
-    birthday: '02/15/2023',
-}
+    //setInterval
+    const interval = setInterval(() => {
+        console.log(
+            new Intl.DateTimeFormat('ru-RU', {
+                minutes: 'numeric',
+                seconds: 'numeric',
+            }).format(finish + correctionEventLoop - new Date())
+        )
+    }, 1000)
 
-function isBirthday(user) {
-    const birthdayUser = new Date(user.birthday);
-    const currentDay = new Date();
-    if (birthdayUser.getMonth() !== currentDay.getMonth()) {
-        return false;
-    }
-    if (birthdayUser.getDate() !== currentDay.getDate()) {
-        return false;
-    }
-    return true;
+    //setTimeout
+    setTimeout(() => {
+        clearInterval(interval);
+        console.log('ready')
+    }, time);
 }
+pizzaTimer(5000);
+
+
