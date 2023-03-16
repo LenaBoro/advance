@@ -76,5 +76,3 @@ function pizzaTimer(time) {
     }, time);
 }
 pizzaTimer(5000);
-
-
