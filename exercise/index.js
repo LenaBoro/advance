@@ -122,3 +122,42 @@ const product1 = new Product([1, 'Bread', 10]);
 box1.addProduct(product1);
 box1.increaseProduct(1);
 
+
+/* 8 step */
+
+
+class User {
+    #login;
+    #_password;
+
+    constructor(login, password) {
+        this.#password = password;
+        this.#login = login;
+    }
+
+    get loginUser() {
+        return this.#login;
+    }
+
+    set #password(passw) {
+        return this.#_password = passw.split('').reverse().join('');
+    }
+
+    get #password() {
+        return this.#_password.split('').reverse().join('');
+    }
+
+    checkPass(pass) {
+        return this.#password === pass;
+    }
+    changePass(oldPass, newPass) {
+        if (!this.checkPass(oldPass)) {
+            return false;
+        }
+        this.#password = newPass;
+        return true;
+    }
+}
+const user1 = new User('login', '123');
+user1.changePass('123', '012');
+console.log(user1);
