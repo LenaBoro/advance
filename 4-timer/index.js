@@ -1,11 +1,11 @@
 'use strict';
 
 const blockTimer = {
-    months: document.querySelector('.month'),
-    days: document.querySelector('.day'),
+    months: document.querySelector('.months'),
+    days: document.querySelector('.days'),
     minutes: document.querySelector('.minutes'),
     seconds: document.querySelector('.seconds'),
-    hours: document.querySelector('.hour'),
+    hours: document.querySelector('.hours'),
 
     words: {
         months: ['месяц', 'месяца', 'месяцев'],
@@ -17,8 +17,6 @@ const blockTimer = {
 }
 const blockTimer2 = document.querySelector('.timer-ny2');
 const info = document.querySelector('.info');
-
-
 
 function foldingWord(val, words) {
     const value = Math.abs(Number(val)) % 100;
@@ -37,8 +35,9 @@ function timerNewYear(dateNY) {
 
     const interval = setInterval(() => {
         const now = new Date(),
-            monthNow = now.getMonth(),
             deltaDates = finish - now.getTime(),
+
+            monthNow = now.getMonth(),
             yearNow = now.getFullYear(),
             dayInMonth = (32 - new Date(now.getFullYear(), now.getMonth(), 32).getDate());
 
@@ -56,7 +55,7 @@ function timerNewYear(dateNY) {
             }
         }
 
-        blockTimer2.innerText = `${new Intl.DateTimeFormat('en-US', {
+        blockTimer2.innerText = `${new Intl.DateTimeFormat('ru', {
             month: "numeric",
             day: "numeric",
             hour: "numeric",
