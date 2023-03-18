@@ -78,3 +78,47 @@ function pizzaTimer(time) {
 pizzaTimer(5000);
 
 
+/* 7 step */
+const Product = function (obj) {
+    const [id, name, count] = obj;
+    this.id = id;
+    this.name = name;
+    this.count = count;
+};
+
+const Box = function () {
+    this.arrayProducts = [];
+}
+
+Box.prototype.addProduct = function (obj) {
+    if (this.arrayProducts.find(product => {
+        if (product.is === obj.id) { return; }
+    }))
+        this.arrayProducts.push(obj);
+}
+
+Box.prototype.increaseProduct = function (id) {
+    this.arrayProducts.map(product => {
+        if (product.id === id) {
+            count += 1;
+            return product
+        }
+        return product;
+    }).filter(product => product.count > 0)
+}
+
+Box.prototype.decreaseProduct = function (id) {
+    this.arrayProducts.map(product => {
+        if (product.id === id) {
+            count += 1;
+            return product
+        }
+        return product;
+    }).filter(product => product.count > 0)
+}
+
+const box1 = new Box();
+const product1 = new Product([1, 'Bread', 10]);
+box1.addProduct(product1);
+box1.increaseProduct(1);
+
