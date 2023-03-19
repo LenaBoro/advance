@@ -6,14 +6,13 @@ const blockTimer = {
     minutes: document.querySelector('.minutes'),
     seconds: document.querySelector('.seconds'),
     hours: document.querySelector('.hours'),
-
-    words: {
-        months: ['месяц', 'месяца', 'месяцев'],
-        days: ['день', 'дня', 'дней'],
-        minutes: ['минута', 'минуты', 'минут'],
-        hours: ['час', 'часа', 'часов'],
-        seconds: ['секунда', 'секунды', 'секунд']
-    }
+}
+const words = {
+    months: ['месяц', 'месяца', 'месяцев'],
+    days: ['день', 'дня', 'дней'],
+    minutes: ['минута', 'минуты', 'минут'],
+    hours: ['час', 'часа', 'часов'],
+    seconds: ['секунда', 'секунды', 'секунд']
 }
 const blockTimer2 = document.querySelector('.timer-ny2');
 const info = document.querySelector('.info');
@@ -50,9 +49,8 @@ function timerNewYear(dateNY) {
         }
 
         for (const [key] of Object.entries(blockTimer)) {
-            if (key !== 'words') {
-                blockTimer[key].innerText = `${timeObj[key]} ${foldingWord(timeObj[key], blockTimer.words[key])}`;
-            }
+            blockTimer[key].innerText = `${timeObj[key]} ${foldingWord(timeObj[key], words[key])}`;
+
         }
 
         blockTimer2.innerText = `${new Intl.DateTimeFormat('ru', {
