@@ -13,9 +13,9 @@ class Car {
         return this.#mileage;
     }
 
-    set setMileage(newVal) {
-        if (this.getMileage > newVal) { return false };
-        this.#mileage = newVal;
+    set setMileage(newMileage) {
+        if (this.getMileage > newMileage) { return false };
+        this.#mileage = newMileage;
     }
 
     info() {
