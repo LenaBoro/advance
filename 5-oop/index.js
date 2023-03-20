@@ -1,7 +1,6 @@
 'use strict';
 
-const Character = function (obj) {
-    const { name, lang, race } = obj;
+const Character = function ({ name, lang, race }) {
     this.name = name;
     this.lang = lang;
     this.race = race;
@@ -36,9 +35,8 @@ Elf.prototype.createSpell = function (stringSpell) {
 }
 
 const ork1 = new Ork({ name: 'Semen', lang: 'ork\'s toungue', race: 'ork', weapon: 'axe' });
-const elf1 = new Ork({ name: 'Nemes', lang: 'elf\'s toungue', race: 'elf' });
+const elf1 = new Elf({ name: 'Nemes', lang: 'elf\'s toungue', race: 'elf' });
 
 ork1.sayHi();
 elf1.sayHi();
-
 elf1.createSpell('give me food');
