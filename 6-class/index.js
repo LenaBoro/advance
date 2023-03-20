@@ -9,12 +9,14 @@ class Car {
         this.#mileage = mileage;
     }
 
-    get getMileage() {
+    get mileage() {
         return this.#mileage;
     }
 
-    set setMileage(newMileage) {
-        if (this.getMileage > newMileage) { return false };
+    set mileage(newMileage) {
+        if (this.mileage > newMileage) {
+            return false;
+        };
         this.#mileage = newMileage;
     }
 
@@ -24,7 +26,7 @@ class Car {
 }
 
 const car1 = new Car('Supra', 'Toyota', 100);
-car1.getMileage;
-car1.setMileage = 200;
-car1.setMileage = 100;
+car1.mileage;
+car1.mileage = 200;
+car1.mileage = 100;
 car1.info();
