@@ -77,7 +77,6 @@ function pizzaTimer(time) {
 }
 pizzaTimer(5000);
 
-
 /* 7 step */
 const Product = function (obj) {
     const [id, name, count] = obj;
@@ -161,3 +160,20 @@ class User {
 const user1 = new User('login', '123');
 user1.changePass('123', '012');
 console.log(user1);
+
+
+/* 11 */
+
+const request = new XMLHttpRequest();
+request.open('GET', 'https://dummyjson.com/products');
+request.send();
+
+request.addEventListener('load', function () {
+
+    console.log(this.response)
+    const { products } = JSON.parse(this.response);
+    const result = products.reduce((acc, product) => {
+        return acc += product.price;
+    }, 0)
+    console.log(result / products.length);
+})

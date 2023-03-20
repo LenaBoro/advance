@@ -1,0 +1,13 @@
+.timer-ny1{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 80%;
+}
+.timer-ny__item{
+    width: calc(100% / 5);
+}
+
+.display--none{
+    display:none;
+}
