@@ -77,7 +77,6 @@ function pizzaTimer(time) {
 }
 pizzaTimer(5000);
 
-
 /* 7 step */
 const Product = function (obj) {
     const [id, name, count] = obj;
@@ -161,6 +160,7 @@ class User {
 const user1 = new User('login', '123');
 user1.changePass('123', '012');
 console.log(user1);
+
 
 /* 11 */
 
