@@ -39,7 +39,7 @@ function timerNewYear(dateNY) {
         dayNY = new Date(dateNY).getDate();
 
     const interval = setInterval(() => {
-        let result = '';
+        let resutlStringDate = '';
         const now = new Date(),
             deltaDates = finish - now.getTime(),
 
@@ -56,10 +56,10 @@ function timerNewYear(dateNY) {
         }
 
         for (const [key] of Object.entries(blockTimer)) {
-            result += `<p data-type="${key}" class="timer__item">${timeObj[key]} ${foldingWord(timeObj[key], words[key])}</p>`;
+            resutlStringDate += `<p data-type="${key}" class="timer__item">${timeObj[key]} ${foldingWord(timeObj[key], words[key])}</p>`;
         }
 
-        blockTimer1.innerHTML = result;
+        blockTimer1.innerHTML = resutlStringDate;
 
         blockTimer2.innerText = `${new Intl.DateTimeFormat('ru', {
             month: "numeric",
