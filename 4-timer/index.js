@@ -1,21 +1,27 @@
 'use strict';
 
 const blockTimer = {
-    months: document.querySelector('.months'),
-    days: document.querySelector('.days'),
-    minutes: document.querySelector('.minutes'),
-    seconds: document.querySelector('.seconds'),
-    hours: document.querySelector('.hours'),
+    month: document.querySelector('.timer[data-type="month"]'),
+    day: document.querySelector('.timer[data-type= "day"]'),
+    minute: document.querySelector('.timer[data-type="minute"]'),
+    second: document.querySelector('.timer[data-type="second"]'),
+    hour: document.querySelector('.timer[data-type="hour"]'),
 }
 const words = {
-    months: ['месяц', 'месяца', 'месяцев'],
-    days: ['день', 'дня', 'дней'],
-    minutes: ['минута', 'минуты', 'минут'],
-    hours: ['час', 'часа', 'часов'],
-    seconds: ['секунда', 'секунды', 'секунд']
+    month: ['месяц', 'месяца', 'месяцев'],
+    day: ['день', 'дня', 'дней'],
+    minute: ['минута', 'минуты', 'минут'],
+    hour: ['час', 'часа', 'часов'],
+    second: ['секунда', 'секунды', 'секунд']
 }
-const blockTimer2 = document.querySelector('.timer-ny2');
+const blockTimer1 = document.querySelector('.timer[data-type="timer_variant1"]');
+const blockTimer2 = document.querySelector('.timer[data-type="timer_variant2"]');
 const info = document.querySelector('.info');
+const MILLISECONDS_IN_HOUR = 36000;
+const MILLISECONDS_IN_MINUTE = 60000;
+const MILLISECONDS_IN_SECOND = 1000;
+const HOURS_PER_DAY = 24;
+const NUMBER_OF_MONTH = 11;
 
 function foldingWord(val, words) {
     const value = Math.abs(Number(val)) % 100;
@@ -33,6 +39,7 @@ function timerNewYear(dateNY) {
         dayNY = new Date(dateNY).getDate();
 
     const interval = setInterval(() => {
+        let result = '';
         const now = new Date(),
             deltaDates = finish - now.getTime(),
 
@@ -41,17 +48,18 @@ function timerNewYear(dateNY) {
             dayInMonth = (32 - new Date(now.getFullYear(), now.getMonth(), 32).getDate());
 
         const timeObj = {
-            months: Math.abs(monthNow - monthNY + (11 * (yearNow - yearNY))),
-            days: (Math.abs(monthNow - monthNY + (11 * (yearNow - yearNY))) === 0) ? Math.abs(dayNY - now.getDate()) : dayInMonth - now.getDate(),
-            hours: Math.floor((deltaDates % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            minutes: Math.floor((deltaDates % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds: Math.floor((deltaDates % (1000 * 60)) / 1000),
+            month: Math.abs(monthNow - monthNY + (NUMBER_OF_MONTH * (yearNow - yearNY))),
+            day: (Math.abs(monthNow - monthNY + (NUMBER_OF_MONTH * (yearNow - yearNY))) === 0) ? Math.abs(dayNY - now.getDate()) : dayInMonth - now.getDate(),
+            hour: Math.floor((deltaDates % (MILLISECONDS_IN_HOUR * HOURS_PER_DAY)) / (MILLISECONDS_IN_HOUR)),
+            minute: Math.floor((deltaDates % (MILLISECONDS_IN_HOUR)) / (MILLISECONDS_IN_MINUTE)),
+            second: Math.floor((deltaDates % (MILLISECONDS_IN_HOUR)) / MILLISECONDS_IN_SECOND),
         }
 
         for (const [key] of Object.entries(blockTimer)) {
-            blockTimer[key].innerText = `${timeObj[key]} ${foldingWord(timeObj[key], words[key])}`;
-
+            result += `<p data-type="${key}" class="timer__item">${timeObj[key]} ${foldingWord(timeObj[key], words[key])}</p>`;
         }
+
+        blockTimer1.innerHTML = result;
 
         blockTimer2.innerText = `${new Intl.DateTimeFormat('ru', {
             month: "numeric",
@@ -59,20 +67,12 @@ function timerNewYear(dateNY) {
             hour: "numeric",
             minute: "numeric",
             second: "numeric",
-        }).formatToParts(new Date(yearNow, timeObj.months - 1, timeObj.days, timeObj.hours, timeObj.minutes, timeObj.seconds))
+        }).formatToParts(new Date(yearNow, timeObj.month - 1, timeObj.day, timeObj.hour, timeObj.minute, timeObj.second))
             .map(({ type, value }) => {
-                switch (type) {
-                    case 'month': return `${value} ${foldingWord(value, blockTimer.words.months)}`;
-                        break;
-                    case 'day': return `${value} ${foldingWord(value, blockTimer.words.days)}`;
-                        break;
-                    case 'minute': return `${value} ${foldingWord(value, blockTimer.words.minutes)}`;
-                        break
-                    case 'hour': return `${value} ${foldingWord(value, blockTimer.words.hours)}`;
-                        break;
-                    case 'second': return `${value} ${foldingWord(value, blockTimer.words.seconds)}`;
-                        break;
-                    default: return value;
+                if (type !== 'literal') {
+                    return `${value} ${foldingWord(value, words[type])}`;
+                } else {
+                    return ' ';
                 }
             }).reduce((string, part) => string + part)
             }`
