@@ -76,3 +76,104 @@ function pizzaTimer(time) {
     }, time);
 }
 pizzaTimer(5000);
+
+/* 7 step */
+const Product = function (obj) {
+    const [id, name, count] = obj;
+    this.id = id;
+    this.name = name;
+    this.count = count;
+};
+
+const Box = function () {
+    this.arrayProducts = [];
+}
+
+Box.prototype.addProduct = function (obj) {
+    if (this.arrayProducts.find(product => {
+        if (product.is === obj.id) { return; }
+    }))
+        this.arrayProducts.push(obj);
+}
+
+Box.prototype.increaseProduct = function (id) {
+    this.arrayProducts.map(product => {
+        if (product.id === id) {
+            count += 1;
+            return product
+        }
+        return product;
+    }).filter(product => product.count > 0)
+}
+
+Box.prototype.decreaseProduct = function (id) {
+    this.arrayProducts.map(product => {
+        if (product.id === id) {
+            count += 1;
+            return product
+        }
+        return product;
+    }).filter(product => product.count > 0)
+}
+
+const box1 = new Box();
+const product1 = new Product([1, 'Bread', 10]);
+box1.addProduct(product1);
+box1.increaseProduct(1);
+
+
+/* 8 step */
+
+
+class User {
+    #login;
+    #_password;
+
+    constructor(login, password) {
+        this.#password = password;
+        this.#login = login;
+    }
+
+    get loginUser() {
+        return this.#login;
+    }
+
+    set #password(passw) {
+        return this.#_password = passw.split('').reverse().join('');
+    }
+
+    get #password() {
+        return this.#_password.split('').reverse().join('');
+    }
+
+    checkPass(pass) {
+        return this.#password === pass;
+    }
+    changePass(oldPass, newPass) {
+        if (!this.checkPass(oldPass)) {
+            return false;
+        }
+        this.#password = newPass;
+        return true;
+    }
+}
+const user1 = new User('login', '123');
+user1.changePass('123', '012');
+console.log(user1);
+
+
+/* 11 */
+
+const request = new XMLHttpRequest();
+request.open('GET', 'https://dummyjson.com/products');
+request.send();
+
+request.addEventListener('load', function () {
+
+    console.log(this.response)
+    const { products } = JSON.parse(this.response);
+    const result = products.reduce((acc, product) => {
+        return acc += product.price;
+    }, 0)
+    console.log(result / products.length);
+})
