@@ -12,6 +12,4 @@ const promise = fetch(url)
             }
         }
     })
-
-
-    .catch(error => { throw new Error('Error') })
+    .catch(error => console.log(error))
