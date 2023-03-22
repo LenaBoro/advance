@@ -6,14 +6,14 @@ class Billing {
         this.typeCalculate = typeCalculate;
     }
 
-    calculateTotal(...args) {
-        return this.amount = this.typeCalculate.calculate(...args);
+    calculateTotal(args) {
+        return this.amount = this.typeCalculate.calculate(args);
     }
 }
 
 
 class Count {
-    calculate(...args) {
+    calculate(args) {
         return;
     }
 }
