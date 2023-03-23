@@ -2,14 +2,12 @@
 
 const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 const xhrPokemon = new XMLHttpRequest();
-xhrPokemon.open('GET', url);
-xhrPokemon.send();
+xhrPokemon.open('GET', url, true);
 xhrPokemon.onload = function () {
     const pokemon = JSON.parse(xhrPokemon.response);
     const abilityUrl = pokemon.abilities[0].ability.url;
     const xhrPokemonAbility = new XMLHttpRequest();
     xhrPokemonAbility.open('GET', abilityUrl);
-    xhrPokemonAbility.send();
     xhrPokemonAbility.onload = function () {
         const effectEntries = JSON.parse(xhrPokemonAbility.response).effect_entries;
         for (const key of effectEntries) {
@@ -18,14 +16,17 @@ xhrPokemon.onload = function () {
             }
         }
     }
-    xhrPokemonAbility.onerror = function () {
-        alert(`Ошибка соединения`);
-    };
-};
 
+    xhrPokemonAbility.onerror = function () {
+        alert(`Ошибка соединения с ability`);
+    };
+    xhrPokemonAbility.send();
+}
 xhrPokemon.onerror = function () {
-    alert(`Ошибка соединения`);
+    alert(`Ошибка соединения c pokemon`);
 };
+xhrPokemon.send();
+
 
 // promisify more readable code
 
