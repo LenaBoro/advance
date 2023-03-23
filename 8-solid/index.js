@@ -1,45 +1,45 @@
-class Billing {
+class CalculateOperation {
     amount = 0;
-    typeCalculate;
-
     constructor(typeCalculate) {
         this.typeCalculate = typeCalculate;
     }
 
-    calculateTotal(args) {
-        return this.amount = this.typeCalculate.calculate(args);
+    calculateTotal(...args) {
+        return this.amount = this.typeCalculate.calculate(...args);
     }
 }
 
-
-class Count {
-    calculate(args) {
+class Operation {
+    calculate() {
         return;
     }
 }
 
-class fixBilling extends Count {
+class FixOperation extends Operation {
     calculate(amount) {
         return amount;
     }
 }
 
-class hourBilling extends Count {
+class HourOperation extends Operation {
     calculate(hours, amount) {
         return hours * amount;
     }
 }
-class itemBilling extends Count {
+class ItemOperation extends Operation {
     calculate(hours, items) {
         return hours * items;
     }
 }
 
-const billing1 = new Billing(new hourBilling());
-const billing2 = new Billing(new itemBilling());
+const billing1 = new CalculateOperation(new HourOperation());
+const billing2 = new CalculateOperation(new ItemOperation());
+const billing3 = new CalculateOperation(new FixOperation());
 
 billing1.calculateTotal(4, 100);
 billing2.calculateTotal(4, 2);
+billing3.calculateTotal(100);
 
 console.log(billing1);
 console.log(billing2);
+console.log(billing3);
