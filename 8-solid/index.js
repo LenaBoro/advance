@@ -32,14 +32,14 @@ class ItemOperation extends Operation {
     }
 }
 
-const billing1 = new CalculateOperation(new HourOperation());
-const billing2 = new CalculateOperation(new ItemOperation());
-const billing3 = new CalculateOperation(new FixOperation());
+const billingCount1 = new CalculateOperation(new HourOperation());
+const billingCount2 = new CalculateOperation(new ItemOperation());
+const billingCount3 = new CalculateOperation(new FixOperation());
 
-billing1.calculateTotal(4, 100);
-billing2.calculateTotal(4, 2);
-billing3.calculateTotal(100);
+billingCount1.calculateTotal(4, 100);
+billingCount2.calculateTotal(4, 2);
+billingCount3.calculateTotal(100);
 
-console.log(billing1);
-console.log(billing2);
-console.log(billing3);
+console.log(billingCount1);
+console.log(billingCount2);
+console.log(billingCount3);
