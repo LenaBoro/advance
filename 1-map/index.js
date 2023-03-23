@@ -1,6 +1,5 @@
 'use strict';
 
-
 const arrayObjPeople = [
     { id: 1, name: 'Vasya' },
     { id: 2, name: 'Petya' },
