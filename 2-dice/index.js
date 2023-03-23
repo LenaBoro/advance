@@ -1,3 +1,4 @@
+'use strict';
 
 const d4 = [1, 4];
 const d6 = [1, 6];
