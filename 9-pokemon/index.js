@@ -2,13 +2,19 @@
 
 const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
 const xhrPokemon = new XMLHttpRequest();
-xhrPokemon.open('GET', url, true);
+xhrPokemon.open('GET', url);
 xhrPokemon.onload = function () {
+    if (xhrPokemon.status !== 202 && xhrPokemon.status > 300) {
+        xhrPokemon.onerror();
+    }
     const pokemon = JSON.parse(xhrPokemon.response);
     const abilityUrl = pokemon.abilities[0].ability.url;
     const xhrPokemonAbility = new XMLHttpRequest();
     xhrPokemonAbility.open('GET', abilityUrl);
     xhrPokemonAbility.onload = function () {
+        if (xhrPokemonAbility.status !== 202 && xhrPokemonAbility.status > 300) {
+            xhrPokemonAbility.onerror();
+        }
         const effectEntries = JSON.parse(xhrPokemonAbility.response).effect_entries;
         for (const key of effectEntries) {
             if (key.language.name === 'en') {
@@ -16,12 +22,12 @@ xhrPokemon.onload = function () {
             }
         }
     }
-
     xhrPokemonAbility.onerror = function () {
         alert(`Ошибка соединения с ability`);
     };
     xhrPokemonAbility.send();
 }
+
 xhrPokemon.onerror = function () {
     alert(`Ошибка соединения c pokemon`);
 };
