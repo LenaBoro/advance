@@ -8,6 +8,7 @@ function isValidAge(dateStr) {
 
     if (isNaN(userDate)) {
         console.error(userDate);
+        return false;
     };
 
     const deltaAge = Number(currentDate.getFullYear()) - Number(userDate.getFullYear());
