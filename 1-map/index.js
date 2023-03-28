@@ -1,15 +1,19 @@
 'use strict';
 
-const arrayObjPeople = [
+const users = [
     { id: 1, name: 'Vasya' },
     { id: 2, name: 'Petya' },
     { id: 1, name: 'Vasya' }
 ];
 
-const setObjPeople = new Set(arrayObjPeople.map((obj) => {
-    return arrayObjPeople.find(people => {
-        if (people.id === obj.id) {
-            return people;
-        }
+function unifyById(list) {
+    list.map((obj) => {
+        return list.find(item => {
+            if (item.id === obj.id) {
+                return item;
+            }
+        })
     })
-}));
+}
+
+const uniqUsersSet = new Set(unifyById(users));
