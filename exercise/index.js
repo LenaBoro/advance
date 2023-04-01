@@ -75,7 +75,7 @@ function pizzaTimer(time) {
         console.log('ready')
     }, time);
 }
-pizzaTimer(5000);
+//pizzaTimer(5000);
 
 /* 7 step */
 const Product = function (obj) {
@@ -177,3 +177,57 @@ request.addEventListener('load', function () {
     }, 0)
     console.log(result / products.length);
 })
+
+
+/*--  14 step --*/
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+};
+
+function getCurrentPosition(options) {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    })
+}
+async function getCurrLocationUser(position) {
+    try {
+        const myCoordinate = await getCurrLocationUser(position);
+        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-clients?latitude=${myCoordinate.coords.latitude}&longitude=${myCoordinate.coords.longitude}`)
+
+        if (!res.ok) {
+            throw new Error(res.status);
+        }
+        const data = await res.json();
+        console.log(data);
+    }
+    catch {
+        console.error(new Error('error'));
+    }
+}
+
+//getCurrentPosition(options);
+const textActivity = document.querySelector('.activity');
+
+async function getActivity() {
+    const result = await fetch('https://www.boredapi.com/api/activity');
+    return result.json();
+}
+
+
+async function generatorActivity() {
+
+    try {
+        const activities = new Promise.all([
+            getActivity(),
+            getActivity(),
+            getActivity()
+        ])
+        console.log(activities)
+    } catch {
+        console.error('error');
+    }
+}
+
+
