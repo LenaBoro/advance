@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const userBirthday = '2022-01-01';
 
