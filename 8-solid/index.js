@@ -1,11 +1,11 @@
 class CalculateOperation {
     amount = 0;
-    constructor(typeCalculate) {
-        this.typeCalculate = typeCalculate;
+    constructor(calculateType) {
+        this.calculateType = calculateType;
     }
 
     calculateTotal(...args) {
-        return this.amount = this.typeCalculate.calculate(...args);
+        return this.amount = this.calculateType.calculate(...args);
     }
 }
 

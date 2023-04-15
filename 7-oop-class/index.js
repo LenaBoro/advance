@@ -6,7 +6,7 @@ class Character {
     }
 
     log() {
-        console.log(`${this.lang}, ${this.race}`);
+        console.log(`${this.lang}, ${this.race} `);
     }
 }
 
@@ -31,9 +31,9 @@ class Elf extends Character {
 
 const ork1 = new Ork('Semen', 'org\'s tongue', 'ork');
 ork1.addWeapon('axe');
-console.log(ork1);
+ork1.log();
 
 
 const elf1 = new Elf('Nemes', 'elf\'s tongue', 'elf');
 elf1.createSpell('hello');
-console.log(elf1);
+elf1.log();

@@ -33,9 +33,6 @@ xhrPokemon.onerror = function () {
 };
 xhrPokemon.send();
 
-
-// promisify more readable code
-
 function loadPokemon(url, cb) {
     const xhrRequest = new XMLHttpRequest();
     xhrRequest.open('GET', url);
@@ -48,7 +45,7 @@ function loadPokemon(url, cb) {
     xhrRequest.send();
 }
 
-function makePokemonRequest(url) {
+function makePromisifiedXhrRequest(url) {
     return new Promise(function (resolve, reject) {
         const xhrRequest = new XMLHttpRequest();
         xhrRequest.open('GET', url);
@@ -72,11 +69,13 @@ function makePokemonRequest(url) {
     })
 }
 
-makePokemonRequest(url)
+let getPokemonEffects = makePromisifiedXhrRequest(url);
+
+getPokemonEffects
     .then((response) => JSON.parse(response))
     .then((data) => {
         const abilityUrl = data.abilities[0].ability.url;
-        return makePokemonRequest(abilityUrl);
+        return makePromisifiedXhrRequest(abilityUrl);
     })
     .then(response => JSON.parse(response))
     .then((data) => {
