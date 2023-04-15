@@ -1,6 +1,3 @@
-
-//getCurrentPosition(success, error, options)
-
 const options = {
     enableHighAccuracy: true,
     timeout: 5000,
