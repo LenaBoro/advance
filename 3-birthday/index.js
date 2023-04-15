@@ -10,6 +10,7 @@ function isValidAge(dateStr) {
         console.error(userDate);
         return false;
     };
+
     const deltaMonth = Number(currentDate.getMonth()) - Number(userDate.getMonth());
     const deltaAge = Number(currentDate.getFullYear()) - Number(userDate.getFullYear());
     const deltaDate = Number(currentDate.getDate()) - Number(userDate.getDate());
